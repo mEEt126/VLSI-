@@ -1,0 +1,70 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 11.10.2019 15:11:05
+-- Design Name: 
+-- Module Name: ripp_carry_tb - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity ripp_carry_tb is
+--  Port ( );
+end ripp_carry_tb;
+
+architecture Behavioral of ripp_carry_tb is
+component ripp_carry is
+    Port ( A : in STD_LOGIC_VECTOR (3 downto 0);
+           B : in STD_LOGIC_VECTOR (3 downto 0);
+           Cin : in STD_LOGIC;
+           S : out STD_LOGIC_VECTOR (3 downto 0);
+           Cout : out STD_LOGIC);
+end component;
+signal Cin,Cout: STD_LOGIC := '0';
+signal S,A,B: STD_LOGIC_VECTOR (3 downto 0) := "0000";
+begin
+uut: ripp_carry port map(A=>A, B=>B, Cin=>Cin, S=>S, Cout=>Cout);
+process
+begin
+A <= "0100";
+B <= "0110";
+Cin <= '1';
+wait for 100ns; 
+A <= "1111";
+B <= "1111";
+Cin <= '1';
+wait for 100ns;
+A <= "1100";
+B <= "1001";
+Cin <= '0';
+wait for 100ns;
+A <= "0011";
+B <= "1101";
+Cin <= '0';
+wait for 100ns;
+wait;
+end process; 
+end Behavioral;
